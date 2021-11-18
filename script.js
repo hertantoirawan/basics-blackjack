@@ -61,9 +61,7 @@ const makeDeck = () => {
  * Taken from https://basics.rocketacademy.co/10-javascript-objects/10.3-card-game-example-war
  * Slight modification to pass eslint check.
  */
-const getRandomIndex = (max) => {
-  Math.floor(Math.random() * max);
-};
+const getRandomIndex = (max) => Math.floor(Math.random() * max);
 
 /**
  * Shuffle elements in the cardDeck array. Return the shuffled deck.
