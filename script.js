@@ -1,40 +1,41 @@
 /**
  * Create a standard 52-card deck.
  * Taken from https://basics.rocketacademy.co/10-javascript-objects/10.3-card-game-example-war
+ * Slight modification to pass eslint check.
  */
-var makeDeck = function () {
+const makeDeck = () => {
   // Initialise an empty deck array
-  var cardDeck = [];
+  const cardDeck = [];
   // Initialise an array of the 4 suits in our deck. We will loop over this array.
-  var suits = ["hearts", "diamonds", "clubs", "spades"];
+  const suits = ['hearts', 'diamonds', 'clubs', 'spades'];
 
   // Loop over the suits array
-  var suitIndex = 0;
+  let suitIndex = 0;
   while (suitIndex < suits.length) {
     // Store the current suit in a variable
-    var currentSuit = suits[suitIndex];
+    const currentSuit = suits[suitIndex];
 
     // Loop from 1 to 13 to create all cards for a given suit
     // Notice rankCounter starts at 1 and not 0, and ends at 13 and not 12.
     // This is an example of a loop without an array.
-    var rankCounter = 1;
+    let rankCounter = 1;
     while (rankCounter <= 13) {
       // By default, the card name is the same as rankCounter
-      var cardName = rankCounter;
+      let cardName = rankCounter;
 
       // If rank is 1, 11, 12, or 13, set cardName to the ace or face card's name
-      if (cardName == 1) {
-        cardName = "ace";
-      } else if (cardName == 11) {
-        cardName = "jack";
-      } else if (cardName == 12) {
-        cardName = "queen";
-      } else if (cardName == 13) {
-        cardName = "king";
+      if (cardName === 1) {
+        cardName = 'ace';
+      } else if (cardName === 11) {
+        cardName = 'jack';
+      } else if (cardName === 12) {
+        cardName = 'queen';
+      } else if (cardName === 13) {
+        cardName = 'king';
       }
 
       // Create a new card with the current name, suit, and rank
-      var card = {
+      const card = {
         name: cardName,
         suit: currentSuit,
         rank: rankCounter,
@@ -58,25 +59,27 @@ var makeDeck = function () {
 /**
  * Get a random index ranging from 0 (inclusive) to max (exclusive).
  * Taken from https://basics.rocketacademy.co/10-javascript-objects/10.3-card-game-example-war
+ * Slight modification to pass eslint check.
  */
-var getRandomIndex = function (max) {
-  return Math.floor(Math.random() * max);
+const getRandomIndex = (max) => {
+  Math.floor(Math.random() * max);
 };
 
 /**
  * Shuffle elements in the cardDeck array. Return the shuffled deck.
  * Taken from https://basics.rocketacademy.co/10-javascript-objects/10.3-card-game-example-war
+ * Slight modification to pass eslint check.
  */
-var shuffleCards = function (cardDeck) {
+const shuffleCards = (cardDeck) => {
   // Loop over the card deck array once
-  var currentIndex = 0;
+  let currentIndex = 0;
   while (currentIndex < cardDeck.length) {
     // Select a random index in the deck
-    var randomIndex = getRandomIndex(cardDeck.length);
+    const randomIndex = getRandomIndex(cardDeck.length);
     // Select the card that corresponds to randomIndex
-    var randomCard = cardDeck[randomIndex];
+    const randomCard = cardDeck[randomIndex];
     // Select the card that corresponds to currentIndex
-    var currentCard = cardDeck[currentIndex];
+    const currentCard = cardDeck[currentIndex];
     // Swap positions of randomCard and currentCard in the deck
     cardDeck[currentIndex] = randomCard;
     cardDeck[randomIndex] = currentCard;
@@ -88,7 +91,7 @@ var shuffleCards = function (cardDeck) {
 };
 
 // Initialise the shuffled card deck before the game starts.
-var deck = [];
+let deck = [];
 
 /**
  * Get card value in the game of Blackjack
@@ -96,22 +99,22 @@ var deck = [];
  * - Jack, Queen, King = 10
  * @param {number} cardRank Face value of the card.
  */
-var getBlackjackCardValue = (cardRank) => {
-  if (cardRank == 1) return 11;
+const getBlackjackCardValue = (cardRank) => {
+  if (cardRank === 1) return 11;
   if (cardRank > 10) return 10;
 
   return cardRank;
 };
 
 // Initialize players and dealer hands
-var playerHands = [];
-var dealerHand = [];
+let playerHands = [];
+let dealerHand = [];
 
 /**
  * Deal a card to a hand (player or dealer).
  * @param {object} hand Card hand.
  */
-var dealCard = (hand) => {
+const dealCard = (hand) => {
   const dealtCard = deck.pop();
 
   // Count total and push card into cards array in hand
@@ -119,7 +122,7 @@ var dealCard = (hand) => {
   hand.cards.push(dealtCard);
 
   // Count how many aces are in hand, default value set to 11
-  if (dealtCard.rank == 1) hand.acesAsEleven += 1;
+  if (dealtCard.rank === 1) hand.acesAsEleven += 1;
 };
 
 /**
@@ -127,10 +130,10 @@ var dealCard = (hand) => {
  * Used for testing aces as 1 or 11. Or to cheat :)
  * @param {object} hand Card hand.
  */
-var dealAceOfSpades = (hand) => {
+const dealAceOfSpades = (hand) => {
   const dealtCard = {
-    name: "ace",
-    suit: "spades",
+    name: 'ace',
+    suit: 'spades',
     rank: 1,
   };
 
@@ -139,7 +142,7 @@ var dealAceOfSpades = (hand) => {
   hand.cards.push(dealtCard);
 
   // Count how many aces are in hand, default value set to 11
-  if (dealtCard.rank == 1) hand.acesAsEleven += 1;
+  if (dealtCard.rank === 1) hand.acesAsEleven += 1;
 };
 
 /**
@@ -147,10 +150,10 @@ var dealAceOfSpades = (hand) => {
  * Used for testing Blackjack as pair to Ace of Spades.
  * @param {object} hand Card hand.
  */
-var dealKingOfSpades = (hand) => {
+const dealKingOfSpades = (hand) => {
   const dealtCard = {
-    name: "king",
-    suit: "spades",
+    name: 'king',
+    suit: 'spades',
     rank: 13,
   };
 
@@ -164,7 +167,7 @@ var dealKingOfSpades = (hand) => {
  * @param {number} numOfPlayers Number of players in this round.
  * @param {number} numOfCards Number of cards to deal per hand.
  */
-var dealCards = (numOfPlayers, numOfCards) => {
+const dealCards = (numOfPlayers, numOfCards) => {
   // Prepare hands for players and dealer
   for (let i = 0; i <= numOfPlayers; i += 1) {
     const hand = {
@@ -188,14 +191,14 @@ var dealCards = (numOfPlayers, numOfCards) => {
 
   // Check for double aces in player hand
   for (let i = 0; i < numOfPlayers; i += 1) {
-    if (playerHands[i].acesAsEleven == 2) {
+    if (playerHands[i].acesAsEleven === 2) {
       playerHands[i].total -= 10;
       playerHands[i].acesAsEleven -= 1;
     }
   }
 
   // Check for double aces in dealer hand
-  if (dealerHand[0].acesAsEleven == 2) {
+  if (dealerHand[0].acesAsEleven === 2) {
     dealerHand[0].total -= 10;
     dealerHand[0].acesAsEleven -= 1;
   }
@@ -206,55 +209,55 @@ var dealCards = (numOfPlayers, numOfCards) => {
  * @param {string} name Name of the hand holder.
  * @param {object} hand Hand object that hold the cards.
  */
-var printCards = (name, hand, onlyFirstCard = false) => {
+const printCards = (name, hand, onlyFirstCard = false) => {
   let myOutputValue;
 
   // Emojis to make the UI looks more fun
   const cardSuitEmojis = {
-    hearts: "♥️",
-    diamonds: "♦️",
-    clubs: "♣️",
-    spades: "♠️",
+    hearts: '♥️',
+    diamonds: '♦️',
+    clubs: '♣️',
+    spades: '♠️',
   };
   const cardRankEmojis = {
-    2: "2️⃣",
-    3: "3️⃣",
-    4: "4️⃣",
-    5: "5️⃣",
-    6: "6️⃣",
-    7: "7️⃣",
-    8: "8️⃣",
-    9: "9️⃣",
-    10: "🔟",
+    2: '2️⃣',
+    3: '3️⃣',
+    4: '4️⃣',
+    5: '5️⃣',
+    6: '6️⃣',
+    7: '7️⃣',
+    8: '8️⃣',
+    9: '9️⃣',
+    10: '🔟',
   };
 
-  if (name === "DEALER") myOutputValue = `${name} has `;
+  if (name === 'DEALER') myOutputValue = `${name} has `;
   else myOutputValue = `${name} ${hand.player} has `;
 
   // Print out first card
   // For aces, kings, queens, and jacks, get first letter of name and make it upper case
-  myOutputValue +=
-    (hand.cards[0].name.length > 2
+  myOutputValue
+    += (hand.cards[0].name.length > 2
       ? hand.cards[0].name.charAt(0).toUpperCase()
-      : cardRankEmojis[hand.cards[0].rank]) +
-    cardSuitEmojis[hand.cards[0].suit];
+      : cardRankEmojis[hand.cards[0].rank])
+    + cardSuitEmojis[hand.cards[0].suit];
 
   if (!onlyFirstCard) {
     // Print out more cards
     for (let j = 1; j < hand.cards.length; j += 1) {
-      myOutputValue +=
-        " and " +
-        (hand.cards[j].name.length > 2
-          ? hand.cards[j].name.charAt(0).toUpperCase()
-          : cardRankEmojis[hand.cards[j].rank]) +
-        cardSuitEmojis[hand.cards[j].suit];
+      myOutputValue
+        += ` and ${
+          hand.cards[j].name.length > 2
+            ? hand.cards[j].name.charAt(0).toUpperCase()
+            : cardRankEmojis[hand.cards[j].rank]
+        }${cardSuitEmojis[hand.cards[j].suit]}`;
     }
 
     // Print out total
     myOutputValue += ` with total of ${hand.total}`;
   }
 
-  myOutputValue += "<br/>";
+  myOutputValue += '<br/>';
 
   return myOutputValue;
 };
@@ -266,15 +269,15 @@ var printCards = (name, hand, onlyFirstCard = false) => {
  * @param {number} playerTotal Total of current player hand.
  * @param {number} dealerUpcard Value of dealer card that's already open.
  */
-var getSuggestion = (playerTotal, dealerUpcard) => {
+const getSuggestion = (playerTotal, dealerUpcard) => {
   if (
-    playerTotal >= 17 ||
-    (playerTotal < 17 && playerTotal > 12 && dealerUpcard < 6) ||
-    (playerTotal === 12 && dealerUpcard > 3 && dealerUpcard < 7)
+    playerTotal >= 17
+    || (playerTotal < 17 && playerTotal > 12 && dealerUpcard < 6)
+    || (playerTotal === 12 && dealerUpcard > 3 && dealerUpcard < 7)
   ) {
-    return "stand";
+    return 'stand';
   }
-  return "hit";
+  return 'hit';
 };
 
 // Constants related to Betting
@@ -284,14 +287,14 @@ const WIN_MULTIPLIER = 2;
 const BLACJACK_MULTIPLIER = 2.5;
 
 // Initialize player wallets and game pots
-var playerWallets = [];
-var gamePots = [];
+const playerWallets = [];
+const gamePots = [];
 
 /**
  * Let players buy in.
  * @param {number} numOfPlayers Number of players on the table.
  */
-var buyInPlayers = (numOfPlayers) => {
+const buyInPlayers = (numOfPlayers) => {
   for (let i = 0; i < numOfPlayers; i += 1) {
     playerWallets.push(BUY_IN_AMOUNT); // put buy in amount in player wallets
     gamePots.push(0); // initialize bet amounts to 0 for each player's game pot
@@ -302,7 +305,7 @@ var buyInPlayers = (numOfPlayers) => {
  * Place bets.
  * @param {number} numOfPlayers Number of players on the table.
  */
-var placeBets = (numOfPlayers) => {
+const placeBets = (numOfPlayers) => {
   for (let i = 0; i < numOfPlayers; i += 1) {
     playerWallets[i] -= BET_AMOUNT; // take out bet amount from player wallets
     gamePots[i] = BET_AMOUNT; // put bet amount into player's game pot
@@ -312,22 +315,22 @@ var placeBets = (numOfPlayers) => {
 /**
  * Print chip status of players on the table.
  */
-var printPlayerChipValues = (numOfPlayers) => {
-  let myOutputValue = "";
+const printPlayerChipValues = (numOfPlayers) => {
+  let myOutputValue = '';
 
   // Get amount of money (or in the form of chips) left in players' wallets
   for (let i = 0; i < numOfPlayers; i += 1) {
     myOutputValue += `PLAYER ${i + 1} has $${playerWallets[i]}.<br/>`;
   }
 
-  myOutputValue += `<br/>`;
+  myOutputValue += '<br/>';
   return myOutputValue;
 };
 
 /**
  * Check if there are hands to settle: need to be compared with dealer (not already bust).
  */
-var isThereHandsToSettle = () => {
+const isThereHandsToSettle = () => {
   for (let i = 0; i < gamePots.length; i += 1) {
     // If game pot is still the same as original bet amount, game is not done for the player
     // Game is done for a player if they win or lose(bust)
@@ -373,9 +376,9 @@ TODO:
 */
 
 // Initialize a few helper variables
-var numOfPlayers = 1;
-var gameMode = "READY";
-var playerInFocus = 1;
+let numOfPlayers = 1;
+let gameMode = 'READY';
+let playerInFocus = 1;
 
 // Constants related to game of Blackjack
 const BLACKJACK = 21;
@@ -391,14 +394,14 @@ buyInPlayers(MAX_PLAYERS);
 /**
  * Each player action triggers the main function.
  */
-var main = function (input) {
+const main = (input) => {
   // Start the game, place bets, deal cards
-  if (gameMode === "READY") {
-    gameMode = "GAME_IN_PROGRESS";
+  if (gameMode === 'READY') {
+    gameMode = 'GAME_IN_PROGRESS';
 
     // Get number of players from input, if available
     if (!Number.isNaN(input)) {
-      const inputNumber = parseInt(input);
+      const inputNumber = parseInt(input, 10);
       if (inputNumber > 0) {
         numOfPlayers = inputNumber > MAX_PLAYERS ? MAX_PLAYERS : inputNumber;
       }
@@ -410,50 +413,46 @@ var main = function (input) {
     playerHands = [];
     dealerHand = []; // Reset hands
     dealCards(numOfPlayers, NUMBER_OF_CARDS_TO_START);
-  }
-  // Handle player inputs during game
-  else if (gameMode === "GAME_IN_PROGRESS" && input === "h") {
-    //deal a card to player because the player chooses to 'hit'
+  } else if (gameMode === 'GAME_IN_PROGRESS' && input === 'h') { // Handle player inputs during game
+    // deal a card to player because the player chooses to 'hit'
     dealCard(playerHands[playerInFocus - 1]);
-  } else if (gameMode === "GAME_IN_PROGRESS" && input === "s") {
-    //player chooses to 'stand' so go the next player
-    if (numOfPlayers === playerInFocus) gameMode = "EVALUATE_HANDS";
+  } else if (gameMode === 'GAME_IN_PROGRESS' && input === 's') {
+    // player chooses to 'stand' so go the next player
+    if (numOfPlayers === playerInFocus) gameMode = 'EVALUATE_HANDS';
     else playerInFocus += 1;
-  } else if (gameMode === "GAME_IN_PROGRESS" && input === "h ") {
-    //deal an Ace of Spades to player because the player wants to win
+  } else if (gameMode === 'GAME_IN_PROGRESS' && input === 'h ') {
+    // deal an Ace of Spades to player because the player wants to win
     dealAceOfSpades(playerHands[playerInFocus - 1]);
-  } else if (gameMode === "GAME_IN_PROGRESS" && input === "h  ") {
-    //deal an King of Spades to player because the player wants to win
+  } else if (gameMode === 'GAME_IN_PROGRESS' && input === 'h  ') {
+    // deal an King of Spades to player because the player wants to win
     dealKingOfSpades(playerHands[playerInFocus - 1]);
   }
 
   // Prepare output values
-  let playerInfoMessage = "";
-  let dealerInfoMessage = "";
-  let resultMessage = "";
-  let directionMessage = "";
+  let playerInfoMessage = '';
+  let dealerInfoMessage = '';
+  let resultMessage = '';
+  let directionMessage = '';
 
   // Print out what the player and dealer have
   for (let i = 0; i < numOfPlayers; i += 1) {
-    playerInfoMessage += printCards("PLAYER", playerHands[i]);
+    playerInfoMessage += printCards('PLAYER', playerHands[i]);
   }
-  dealerInfoMessage = printCards("DEALER", dealerHand[0], true);
+  dealerInfoMessage = printCards('DEALER', dealerHand[0], true);
 
-  if (gameMode === "GAME_IN_PROGRESS") {
+  if (gameMode === 'GAME_IN_PROGRESS') {
     let isGameDone = false;
     let isBlackjack = false;
 
     // Check if player has Blackjack
     if (
-      playerHands[playerInFocus - 1].total === BLACKJACK &&
-      playerHands[playerInFocus - 1].cards.length === NUMBER_OF_CARDS_TO_START
+      playerHands[playerInFocus - 1].total === BLACKJACK
+      && playerHands[playerInFocus - 1].cards.length === NUMBER_OF_CARDS_TO_START
     ) {
       resultMessage += `<br/>PLAYER ${playerInFocus}! You have Blackjack! Wait to see if DEALER also has Blackjack.`;
       isBlackjack = true;
-    }
-    // Check if player is going bust
-    else if (playerHands[playerInFocus - 1].total > BLACKJACK) {
-      //if hand has Aces, replaced value with 1 to avoid bust
+    } else if (playerHands[playerInFocus - 1].total > BLACKJACK) { // Check if player is going bust
+      // if hand has Aces, replaced value with 1 to avoid bust
       if (playerHands[playerInFocus - 1].acesAsEleven > 0) {
         playerHands[playerInFocus - 1].total -= 10;
         playerHands[playerInFocus - 1].acesAsEleven -= 1;
@@ -465,9 +464,9 @@ var main = function (input) {
         }
 
         // Reprint all players' cards
-        playerInfoMessage = "";
+        playerInfoMessage = '';
         for (let i = 0; i < numOfPlayers; i += 1) {
-          playerInfoMessage += printCards("PLAYER", playerHands[i]);
+          playerInfoMessage += printCards('PLAYER', playerHands[i]);
         }
       } else {
         resultMessage += `<br/>PLAYER ${playerInFocus}! Sorry, you bust.`;
@@ -482,26 +481,26 @@ var main = function (input) {
       if (numOfPlayers === playerInFocus) {
         // Player in focus is the last player
         if (isThereHandsToSettle()) {
-          directionMessage += `<br/><br/>Click on the Submit button to go to the next step.`;
-          gameMode = "EVALUATE_HANDS";
+          directionMessage += '<br/><br/>Click on the Submit button to go to the next step.';
+          gameMode = 'EVALUATE_HANDS';
         } else {
           // Game is done for all players, Submit button to play next game
           playerInFocus = 1;
-          directionMessage += `<br/><br/>Click on the Submit button to play again.`;
-          gameMode = "READY";
+          directionMessage += '<br/><br/>Click on the Submit button to play again.';
+          gameMode = 'READY';
         }
       } else {
         // Player in focus is not the last player, so Submit to go to next player
-        directionMessage += `<br/><br/>Click on the Submit button to go to the next step.`;
+        directionMessage += '<br/><br/>Click on the Submit button to go to the next step.';
         playerInFocus += 1;
       }
     } else if (isBlackjack) {
       // Player in focus gets Blackjack but still need to be compared with dealer
-      directionMessage += `<br/><br/>Click on the Submit button to go to the next step.`;
+      directionMessage += '<br/><br/>Click on the Submit button to go to the next step.';
 
       if (numOfPlayers === playerInFocus) {
         // Player in focus is the last player
-        gameMode = "EVALUATE_HANDS";
+        gameMode = 'EVALUATE_HANDS';
       } else {
         // Go to next player
         playerInFocus += 1;
@@ -513,18 +512,16 @@ var main = function (input) {
       }.`;
       directionMessage += ` I would suggest to ${getSuggestion(
         playerHands[playerInFocus - 1].total,
-        dealerHand[0].cards[0]
+        dealerHand[0].cards[0],
       )}.<br/>`;
-      directionMessage += `<br/>Please input 'h' if you want to hit (add a card) or 's' if you want to stand (stay with your cards).`;
+      directionMessage += '<br/>Please input \'h\' if you want to hit (add a card) or \'s\' if you want to stand (stay with your cards).';
     }
-  }
-  // Player is done with their cards, time for the dealer to move
-  else if (gameMode === "EVALUATE_HANDS") {
+  } else if (gameMode === 'EVALUATE_HANDS') { // Player is done with their cards, time for the dealer to move
     // Add cards to dealer
     while (dealerHand[0].total < DEALER_HIT_LIMIT) {
       dealCard(dealerHand[0]);
 
-      //if hand has Aces, replaced value with 1 to avoid bust
+      // if hand has Aces, replaced value with 1 to avoid bust
       if (dealerHand[0].total > BLACKJACK && dealerHand[0].acesAsEleven > 0) {
         dealerHand[0].total -= 10;
         dealerHand[0].acesAsEleven -= 1;
@@ -532,31 +529,29 @@ var main = function (input) {
     }
 
     // Reprint the dealer's cards
-    dealerInfoMessage = printCards("DEALER", dealerHand[0]);
+    dealerInfoMessage = printCards('DEALER', dealerHand[0]);
 
     // Go through all players' hands to determine if they win/lose/push(tie)
     for (let playerIndex = 0; playerIndex < numOfPlayers; playerIndex += 1) {
-      if (gamePots[playerIndex] != 0) {
+      if (gamePots[playerIndex] !== 0) {
         resultMessage += `<br/>PLAYER ${playerIndex + 1}! `;
 
         // Player and dealer both has Blackjack
         if (
-          dealerHand[0].total === BLACKJACK &&
-          playerHands[playerIndex].total === BLACKJACK
+          dealerHand[0].total === BLACKJACK
+          && playerHands[playerIndex].total === BLACKJACK
         ) {
           if (
-            dealerHand[0].cards.length === NUMBER_OF_CARDS_TO_START &&
-            playerHands[playerIndex].cards.length === NUMBER_OF_CARDS_TO_START
+            dealerHand[0].cards.length === NUMBER_OF_CARDS_TO_START
+            && playerHands[playerIndex].cards.length === NUMBER_OF_CARDS_TO_START
           ) {
             resultMessage += `It's a Blackjack push! You get your $${BET_AMOUNT} back.`;
           } else {
-            //Player and dealer both has 21
+            // Player and dealer both has 21
             resultMessage += `It's a push! You get your $${BET_AMOUNT} back.`;
           }
           playerWallets[playerIndex] += BET_AMOUNT;
-        }
-        // Only player has Blackjack or 21
-        else if (playerHands[playerIndex].total === BLACKJACK) {
+        } else if (playerHands[playerIndex].total === BLACKJACK) { // Only player has Blackjack/21
           // Player has Blackjack
           if (
             playerHands[playerIndex].cards.length === NUMBER_OF_CARDS_TO_START
@@ -572,54 +567,47 @@ var main = function (input) {
               BET_AMOUNT * WIN_MULTIPLIER
             }.`;
           }
-        }
-        // Only dealer has Blackjack or 21
-        else if (dealerHand[0].total === BLACKJACK) {
+        } else if (dealerHand[0].total === BLACKJACK) { // Only dealer has Blackjack or 21
           // Dealer has Blackjack
           if (dealerHand[0].cards.length === NUMBER_OF_CARDS_TO_START) {
-            resultMessage += `Sorry, you lost. The dealer has Blackjack.`;
+            resultMessage += 'Sorry, you lost. The dealer has Blackjack.';
           } else {
             // Dealer has 21
-            resultMessage += `Sorry, you lost.`;
+            resultMessage += 'Sorry, you lost.';
           }
-        }
-        // Dealer busts
-        else if (dealerHand[0].total > BLACKJACK) {
+        } else if (dealerHand[0].total > BLACKJACK) { // Dealer busts
           playerWallets[playerIndex] += BET_AMOUNT * WIN_MULTIPLIER;
           resultMessage += `The dealer busts. You win $${
             BET_AMOUNT * WIN_MULTIPLIER
           }.`;
-        }
-        // Player and dealer has same total, a push
-        else if (playerHands[playerIndex].total === dealerHand[0].total) {
+        } else if (playerHands[playerIndex].total === dealerHand[0].total) {
+          // Player and dealer has same total, a push
           playerWallets[playerIndex] += BET_AMOUNT;
           resultMessage += `It's a push! You get your $${BET_AMOUNT} back.`;
-        }
-        // Player has better hand than dealer, player wins
-        else if (playerHands[playerIndex].total > dealerHand[0].total) {
+        } else if (playerHands[playerIndex].total > dealerHand[0].total) {
+          // Player has better hand than dealer, player wins
           playerWallets[playerIndex] += BET_AMOUNT * WIN_MULTIPLIER;
           resultMessage += `Congrats! You win $${BET_AMOUNT * WIN_MULTIPLIER}.`;
         } else {
           // Dealer has better hand than player, player loses
-          resultMessage += `Sorry, you lost.`;
+          resultMessage += 'Sorry, you lost.';
         }
       }
     }
 
     // Game is done, back to start of game
     playerInFocus = 1;
-    directionMessage += `<br/><br/>Click on the Submit button to play again.`;
-    gameMode = "READY";
+    directionMessage += '<br/><br/>Click on the Submit button to play again.';
+    gameMode = 'READY';
   }
 
   // Print out all messages
-  const myOutputValue =
-    printPlayerChipValues(numOfPlayers) +
-    playerInfoMessage +
-    `<br/>` +
-    dealerInfoMessage +
-    resultMessage +
-    directionMessage;
+  const myOutputValue = `${printPlayerChipValues(numOfPlayers)
+    + playerInfoMessage
+  }<br/>${
+    dealerInfoMessage
+  }${resultMessage
+  }${directionMessage}`;
 
   // Return output to screen.
   return myOutputValue;

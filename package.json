@@ -16,10 +16,9 @@
     "url": "https://github.com/rocketacademy/basics-beat-that/issues"
   },
   "homepage": "https://github.com/rocketacademy/basics-beat-that#readme",
-  "dependencies": {},
   "devDependencies": {
-    "eslint": "^7.32.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.25.2"
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.3"
   }
 }
